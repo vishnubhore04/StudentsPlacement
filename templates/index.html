@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Machine Learning Model Prediction</title>
+</head>
+<body>
+    <h1>Predict student Placement</h1>
+    <form id="predictionForm">
+        <label for="KNOWLEDGE">KNOWLEDGE:</label>
+        <input type="text" id="KNOWLEDE" name="KNOWLEDE"><br><br>
+        <label for="COMMUNICATION">COMMUNICATION :</label>
+        <input type="text" id="COMMUNICATION" name="COMMUNICATION"><br><br>
+        <label for="PRESENTATION">PRESENTATION :</label>
+        <input type="text" id="PRESENTATION" name="PRESENTATION"><br><br>
+        <input type="button" value="Predict" onclick="makePrediction()">
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+        function makePrediction() {
+            const KNOWLEDGE = document.getElementById('KNOWLEDGE').value;
+            const COMMUNICATION = document.getElementById('COMMUNICATION').value;
+            const PRESENTATION = document.getElementById('PRESENTATION').value;
+            fetch('http://your-server-url/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    feature1: feature1,
+                    feature2: feature2,
+                    feature3: feature3
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'Prediction: ' + data.prediction;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
